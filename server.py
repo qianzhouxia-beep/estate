@@ -37,7 +37,17 @@ ALLOWED_IPS = set(
 )
 VOICES_DIR = os.environ.get("VOICES_DIR", "/app/voices")
 SAMPLE_RATE = 22050
-MODEL_DIR = os.environ.get("MODEL_DIR", "pretrained_models/CosyVoice-300M-SFT")
+
+# 模型路径优先级：1) /tmp/model_dir.txt（runtime-init 写入） 2) 环境变量 3) 默认
+def _resolve_model_dir():
+    if os.path.exists("/tmp/model_dir.txt"):
+        with open("/tmp/model_dir.txt") as f:
+            path = f.read().strip()
+        if path and os.path.exists(path):
+            return path
+    return os.environ.get("MODEL_DIR", "pretrained_models/CosyVoice-300M-SFT")
+
+MODEL_DIR = _resolve_model_dir()
 
 os.makedirs(VOICES_DIR, exist_ok=True)
 
@@ -75,7 +85,13 @@ try:
     model = AutoModel(model_dir=MODEL_DIR)
     logger.info(f"Model loaded in {time.time() - load_start:.1f}s")
 except Exception as e:
-    logger.error(f"Failed to load model: {e}")
+    logger.error(f"Failed to load model from {MODEL_DIR}: {e}")
+    # 打印 /app/pretrained_models 内容帮助调试
+    if os.path.exists("/app/pretrained_models"):
+        logger.error(f"/app/pretrained_models contents: {os.listdir('/app/pretrained_models')}")
+        for root, dirs, files in os.walk("/app/pretrained_models"):
+            for f in files:
+                logger.error(f"  {os.path.join(root, f)}")
     raise
 
 
