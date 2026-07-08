@@ -1,0 +1,5 @@
+{
+  "name": "cosyvoice-estate",
+  "description": "CosyVoice 300M SFT 声音克隆服务（房视界AI 用）",
+  "tags": ["ai", "tts", "voice-clone"]
+}
