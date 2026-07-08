@@ -1,14 +1,9 @@
-# CosyVoice 300M SFT 模型依赖
-# Python 3.10, PyTorch CPU
+# CosyVoice 300M SFT - 精简依赖（CPU 模式）
+# 不装 modelscope/huggingface_hub（启动时用 wget 直链下载模型）
 
 # 核心深度学习
 torch==2.3.1
 torchaudio==2.3.1
-
-# 模型仓库（用于下载 CosyVoice 300M SFT）
-modelscope==1.18.1
-huggingface_hub==0.25.2
-tokenizers==0.19.1
 
 # Web 框架
 fastapi==0.115.0
@@ -22,7 +17,7 @@ librosa==0.10.2
 scipy==1.14.1
 numpy==1.26.4
 
-# 文本处理（HyperFrames TTS 用）
+# 文本处理
 inflect==7.3.1
 g2p-en==2.1.0
 pypinyin==0.51.0
@@ -36,5 +31,6 @@ onnxruntime==1.19.2
 gguf==0.10.0
 python-dateutil==2.9.0
 
-# CosyVoice 源码依赖（不通过 pip 装，直接 clone）
-# git+https://github.com/FunAudioLLM/CosyVoice.git
+# 音频 I/O
+WeTextProcessing
+rotary_embedding_torch
