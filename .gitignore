@@ -1,0 +1,11 @@
+__pycache__/
+cosyvoice/
+deploy_8088.sh
+logs/
+pretrained_models/
+requirements.cpu.txt
+requirements.official.txt
+server.pid
+start_server.sh
+third_party/
+venv/

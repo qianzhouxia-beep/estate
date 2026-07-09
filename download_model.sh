@@ -3,7 +3,7 @@
 # 源：HuggingFace 镜像 https://hf-mirror.com/FunAudioLLM/CosyVoice-300M-SFT
 
 set -e
-MODEL_DIR="/app/pretrained_models/CosyVoice-300M-SFT"
+MODEL_DIR="/home/ubuntu/cosyvoice/pretrained_models/CosyVoice-300M-SFT"
 mkdir -p "$MODEL_DIR"
 
 # 检查是否已下载（看核心文件 llm.pt）
@@ -68,7 +68,7 @@ for f in "${LARGE_FILES[@]}"; do
     fi
 done
 
-cd /app
+cd /home/ubuntu/cosyvoice
 
 # 检查关键文件
 echo ""
